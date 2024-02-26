@@ -2,7 +2,7 @@
 
 ### Key Features
 Rss API offers the following functionalities:
-Search rss news: You can search for news for https://feeds.megaphone.fm/newheights and https://podcastfeeds.nbcnews.com/HL4TzgYC.
+Search rss news: You can search for news via https://feeds.megaphone.fm/newheights and https://podcastfeeds.nbcnews.com/HL4TzgYC.
 
 ### Test Data
 The examples below represent test set of insertions for searching rss news.
