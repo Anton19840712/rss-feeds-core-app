@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rss-api", "rss-api\rss-api.csproj", "{374B4366-D676-4CF4-8C9D-E1C3DA1584EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rss-api", "rss-api\rss-api.csproj", "{374B4366-D676-4CF4-8C9D-E1C3DA1584EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
