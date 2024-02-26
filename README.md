@@ -1,18 +1,17 @@
 # Rss API
-##### Rss news.
 
 ### Key Features
 Rss API offers the following functionalities:
-Search rss news: You can search for news for https://feeds.megaphone.fm/newheights" and https://podcastfeeds.nbcnews.com/HL4TzgYC.
+Search rss news: You can search for news for https://feeds.megaphone.fm/newheights and https://podcastfeeds.nbcnews.com/HL4TzgYC.
 
 ### Test Data
 The examples below represent test set of insertions for searching rss news.
 
-Example 1: Insert 1, 2 as tags for search. Also insert for example, "EP 18" as a filter for header search field in swagger.
+Example 1: Insert 1, 2 as tags for search. Also insert sample string "EP 18" as a filter for header search field in swagger.
 
-### Docker docker-compose files
+### Docker docker-compose files to use with this app.
 
-PostreSql
+PostgreSql
 ```sh
 version: '3.9'
 
