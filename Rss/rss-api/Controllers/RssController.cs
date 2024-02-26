@@ -5,7 +5,9 @@ using rss_api.ControllerHandlers;
 using rss_api.Models.Business;
 using rss_api.Models.Cache;
 using rss_api.Models.Presentation;
-using rss_api.Services;
+using rss_api.Services.Cache;
+using rss_api.Services.Entities;
+using rss_api.Services.Hangfire;
 
 namespace rss_api.Controllers;
 
@@ -14,7 +16,8 @@ namespace rss_api.Controllers;
 public class RssController(
 	IHttpService httpParseService,
 	ICacheService cacheRedisService,
-	IDataBaseService dataBaseService,
+	IPushService pushService,
+	IPullService pullService,
 	IHangFireService removeService) : ControllerBase
 {
 	[HttpGet("get-news")]
@@ -60,13 +63,13 @@ public class RssController(
 			// если же в кеше нету по ключу, то смотрим в базу данных:
 			else
 			{
-				var result = await dataBaseService.AnyRecordsAsync(tag, cancellationToken);
+				var result = await pullService.AnyRecordsAsync(tag, cancellationToken);
 
 				if (result)
 				{
 					if (filters.Any())
 					{
-						var resultBusiness = await dataBaseService.GetByFilterAsync(headerFilter, bodyFilter, tag, cancellationToken);
+						var resultBusiness = await pullService.GetByFilterAsync(headerFilter, bodyFilter, tag, cancellationToken);
 
 						if (resultBusiness != null)
 						{
@@ -76,7 +79,7 @@ public class RssController(
 					}
 					else
 					{
-						var resultBusiness = await dataBaseService.GetAllAsync(tag, cancellationToken);
+						var resultBusiness = await pullService.GetAllAsync(tag, cancellationToken);
 
 						if (resultBusiness != null)
 						{
@@ -98,7 +101,7 @@ public class RssController(
 						cacheRedisService.SetData<RssCacheElements>($"{tag}", mappedToCache, expiryTime);
 
 						var mappedBusinessToStore = httpData.Adapt<RssBusinessElements>();
-						await dataBaseService.StoreDataToDatabaseAsync(mappedBusinessToStore, cancellationToken);
+						await pushService.StoreDataToDatabaseAsync(mappedBusinessToStore, cancellationToken);
 
 						collectionDtoReturn.Add(httpData);
 					}

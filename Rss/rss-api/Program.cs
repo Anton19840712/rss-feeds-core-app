@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using rss_api.Contexts;
 using rss_api.ControllerHandlers;
 using rss_api.Mapping;
-using rss_api.Services;
+using rss_api.Services.Cache;
+using rss_api.Services.Entities;
+using rss_api.Services.Hangfire;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +25,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<ICacheService, CacheService>();
-builder.Services.AddScoped<IDataBaseService, DataBaseService>();
+builder.Services.AddScoped<IPushService, PushService>();
+builder.Services.AddScoped<IPullService, PullService>();
 
 builder.Services.AddScoped<IHangFireService, HangFireService>();
 
